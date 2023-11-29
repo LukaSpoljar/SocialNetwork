@@ -1,0 +1,11 @@
+<nav *ngIf="appRoutes else noCurrentAppRoutes">
+  <mat-button-toggle-group name="navigation" aria-label="Navigation">
+    <mat-button-toggle value="home" (click)=" appRoutes.navigateToHome()">Home</mat-button-toggle>
+    <mat-button-toggle value="profile" (click)="appRoutes.navigateToProfile()">Profile</mat-button-toggle>
+    <mat-button-toggle value="profile" (click)="appRoutes.navigateToAdmin()">Admin</mat-button-toggle>
+  </mat-button-toggle-group>
+</nav>
+
+<ng-template #noCurrentAppRoutes>
+  <h1>No app routes here</h1>
+</ng-template>
