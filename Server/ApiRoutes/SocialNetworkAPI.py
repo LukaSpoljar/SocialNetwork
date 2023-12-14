@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from users_db import get_router
+from ApiRoutes.Users import users_db
+
 
 app = FastAPI(
     title='Social Network',
@@ -7,8 +8,10 @@ app = FastAPI(
     version='0.0.1'
 )
 
+
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
 
-app.include_router(get_router())
+
+app.include_router(users_db.getRou())
