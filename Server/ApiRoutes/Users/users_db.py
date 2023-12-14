@@ -21,7 +21,7 @@ router = APIRouter(
 )
 
 
-@router.get("/users/", tags=["users"])
+@router.get("/", tags=["users"])
 async def read_users():
     return [{"username": "Rick"}, {"username": "Morty"}]
 
@@ -36,5 +36,5 @@ async def read_user(username: str):
     return {"username": username}
 
 
-def get_router():
+def getRou():
     return router
