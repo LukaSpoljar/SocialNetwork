@@ -14,4 +14,4 @@ async def read_root():
     return {"Hello": "World"}
 
 
-app.include_router(users_db.getRou())
+app.include_router(users_db.get_router())

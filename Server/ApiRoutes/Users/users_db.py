@@ -1,6 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi import Header, HTTPException
+from pydantic import BaseModel
 
 
 async def get_token_header(x_token: Annotated[str, Header()]):
@@ -14,27 +15,31 @@ async def get_query_token(token: str):
 
 
 router = APIRouter(
-    prefix="/items",
-    tags=["items"],
-    dependencies=[Depends(get_token_header)],
+    prefix="/users",
+    tags=["users"],
     responses={404: {"description": "Not found"}},
 )
 
 
-@router.get("/", tags=["users"])
-async def read_users():
+@router.get("/users/")
+async def get_users():
     return [{"username": "Rick"}, {"username": "Morty"}]
 
 
-@router.get("/users/me", tags=["users"])
-async def read_user_me():
+@router.put("/users/")
+async def update_user():
     return {"username": "fakecurrentuser"}
 
 
-@router.get("/users/{username}", tags=["users"])
-async def read_user(username: str):
+@router.post("/users/")
+async def post_user(username: str):
     return {"username": username}
 
 
-def getRou():
+@router.delete("/users/")
+async def delete_user(username: str):
+    return {"username": username}
+
+
+def get_router():
     return router
