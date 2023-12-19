@@ -1,17 +1,6 @@
 from typing import Annotated
-from fastapi import APIRouter, Depends, HTTPException
-from fastapi import Header, HTTPException
-from pydantic import BaseModel
-
-
-async def get_token_header(x_token: Annotated[str, Header()]):
-    if x_token != "fake-super-secret-token":
-        raise HTTPException(status_code=400, detail="X-Token header invalid")
-
-
-async def get_query_token(token: str):
-    if token != "jessica":
-        raise HTTPException(status_code=400, detail="No Jessica token provided")
+from fastapi import APIRouter, Depends, HTTPException, Header
+from Models.User import User
 
 
 router = APIRouter(
@@ -21,19 +10,19 @@ router = APIRouter(
 )
 
 
-@router.get("/users/")
-async def get_users():
-    return [{"username": "Rick"}, {"username": "Morty"}]
+@router.get("/{item_id}")
+async def get_user(item_id: int):
+    return {"item_id": item_id}
 
 
 @router.put("/users/")
-async def update_user():
+async def update_user(user: User):
     return {"username": "fakecurrentuser"}
 
 
 @router.post("/users/")
-async def post_user(username: str):
-    return {"username": username}
+async def post_user(user: User):
+    return {"user": user}
 
 
 @router.delete("/users/")
